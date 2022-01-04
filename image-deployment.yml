@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pictures-deployment-razenkov
+spec:
+  selector:
+    matchLabels:
+      app: pictures-controller-razenkov
+  template:
+    metadata:
+      labels:
+        app: pictures-controller-razenkov
+    spec:
+      containers:
+      - name: pictures-controller-razenkov
+        image: razen46/data_management:latest
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "50m"
+        ports:
+        - containerPort: 5000

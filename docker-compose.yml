@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  pictures-controller:
+    image: "pictures-controller:latest"
+    build:
+      context: .
+    container_name: pictures-controller-razenkov
+    ports:
+      - "5000:5000"
+    expose:
+      - "5000"

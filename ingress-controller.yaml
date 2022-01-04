@@ -1,0 +1,265 @@
+#Свободен
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: data-management-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+  labels:
+    name: data-management-ingress
+spec:
+  rules:
+  - host: datamanagement.lambda-it.ru
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: /eremin/api/v1/consume
+        backend:
+          service:
+            name: kafka-service-eremin
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /eremin/api/v1/produce
+        backend:
+          service:
+            name: kafka-service-eremin
+            port:
+              number: 80
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: mongo-nodeport-svc
+            port:
+              number: 27017
+#--------------------------------------------------
+      - pathType: ImplementationSpecific
+        path: /afonin/api/v1/mongo/add
+        backend:
+          service:
+            name: kafka-service-mongo-afonin
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /afonin/api/v1/mongo/get
+        backend:
+          service:
+            name: kafka-service-mongo-afonin
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /afonin/api/v1/sendmsg
+        backend:
+          service:
+            name: kafka-service-producer-afonin
+            port:
+              number: 80
+#--------------------------------------------------
+      - pathType: ImplementationSpecific
+        path: /afonin/api/v1/image/getbyid
+        backend:
+          service:
+            name: service-image-afonin
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /afonin/api/v1/image/getbyname
+        backend:
+          service:
+            name: service-image-afonin
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /afonin/api/v1/image/getsize
+        backend:
+          service:
+            name: service-image-afonin
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /afonin/api/v1/image/modify
+        backend:
+          service:
+            name: service-image-afonin
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /afonin/api/v1/image/add
+        backend:
+          service:
+            name: service-image-afonin
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /afonin/api/v1/image/delete
+        backend:
+          service:
+            name: service-image-afonin
+            port:
+              number: 80
+#--------------------------------------------------
+      - pathType: ImplementationSpecific
+        path: /rubtsov/api/v1/image/getbyid/
+        backend:
+          service:
+            name: service-image-rubtsov
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /rubtsov/api/v1/image/getbyname/
+        backend:
+          service:
+            name: service-image-rubtsov
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /rubtsov/api/v1/image/getinfo/
+        backend:
+          service:
+            name: service-image-rubtsov
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /rubtsov/api/v1/image/getmod/
+        backend:
+          service:
+            name: service-image-rubtsov
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /rubtsov/api/v1/image/add
+        backend:
+          service:
+            name: service-image-rubtsov
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /rubtsov/api/v1/image/delete/
+        backend:
+          service:
+            name: service-image-rubtsov
+            port:
+              number: 80
+#--------------------------------------------------
+      - pathType: ImplementationSpecific
+        path: /events/covid/data
+        backend:
+          service:
+            name: service-covid-events
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /events/covid/graph_death
+        backend:
+          service:
+            name: service-covid-events
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /events/covid/graph_vac
+        backend:
+          service:
+            name: service-covid-events
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /events/covid/percent
+        backend:
+          service:
+            name: service-covid-events
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /events/covid/delete
+        backend:
+          service:
+            name: service-covid-events
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /events/covid/continents
+        backend:
+          service:
+            name: service-covid-events
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /events/covid/correlation
+        backend:
+          service:
+            name: service-covid-events
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /events/covid/top_death
+        backend:
+          service:
+            name: service-covid-events
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /events/covid/graph_death_percent
+        backend:
+          service:
+            name: service-covid-events
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /events/covid/top_vac
+        backend:
+          service:
+            name: service-covid-events
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /events/covid/countries
+        backend:
+          service:
+            name: service-covid-events
+            port:
+              number: 80
+#--------------------------------------------------
+      - pathType: ImplementationSpecific
+        path: /razenkov/api/v1.0/info/
+        backend:
+          service:
+            name: pictures-service-razenkov
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /razenkov/api/v1.0/image_id/
+        backend:
+          service:
+            name: pictures-service-razenkov
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /razenkov/api/v1.0/image_name/
+        backend:
+          service:
+            name: pictures-service-razenkov
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /razenkov/api/v1.0/glue
+        backend:
+          service:
+            name: pictures-service-razenkov
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /razenkov/api/v1.0/send
+        backend:
+          service:
+            name: pictures-service-razenkov
+            port:
+              number: 80
+      - pathType: ImplementationSpecific
+        path: /razenkov/api/v1.0/delete/
+        backend:
+          service:
+            name: pictures-service-razenkov
+            port:
+              number: 80
+#--------------------------------------------------
